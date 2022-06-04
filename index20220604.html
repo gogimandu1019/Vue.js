@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -48,7 +48,7 @@
 
             })
 
-            //vm1.$mount('#test1') //뒤에서 vm1을 #test1에 맥이겠다고 지정할 때 마운트를 사용
+            vm1.$mount('#test1') //뒤에서 vm1을 #test1에 맥이겠다고 지정할 때 마운트를 사용
 
             vm1.$destroy() //소멸 로그 찍혔고, 버튼은 사용할 수 없게 됨 - vue객체에 마운트된 태그를 관리하는 요소를 소멸 / 태그 자체를 소멸시키지는 않음.
 
