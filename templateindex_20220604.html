@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+    <script>
+        window.onload = function(){
+            var test1 = new Vue({
+                el : '#test1',
+                data : {
+                    a1 : '문자열1',
+                    a2 : '문자열2',
+                    a3 : '<h3>문자열3</h3>', //html태그 자체도 그냥 문자열로 인식을 해버림 : template로 인식하게 하려면?
+                    a4 : 'image/pengsoo.jpg',
+                    a5 : 300,
+                    a6 : 200
+
+                }
+            })
+        }
+    </script>
+</head>
+<body>
+    <div id="test1">
+        <h3>{{a1}}</h3>
+        <h3>{{a2}}</h3>
+        <h3>{{a3}}</h3>
+        <div v-html = 'a3'></div> <!-- 이렇게 해야 html태그 인식가능-->
+        <img src = '{{a4}}'><br/>
+        <img v-bind:src = 'a4' v-bind:width='a5' v-bind:height='a6'><br/>
+    </div>
+</body>
+</html>
