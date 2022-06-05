@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+    <script>
+        var vm1 = new Vue({
+            data : {
+                a1 : 100
+            },
+            //vue객체가 관리할 요소들이 만들어지기 전에 호출되는 함수
+            beforeCreate : function(){
+                console.log('vue객체가 관리할 요소들이 만들어지기 전입니다.')
+                console.log('a1 : ' + this.a1)
+            },
+            created : function (){
+                console.log('vue객체가 관리할 요소들이 만들어진 후입니다.')
+                console.log('a1 : ' + this.a1)
+            }
+        })
+    </script>
+</head>
+<body>
+</body>
+</html>
