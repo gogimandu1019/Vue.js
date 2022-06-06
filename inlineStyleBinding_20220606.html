@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+    <script>
+        window.onload = function(){
+            var vm1 = new Vue({
+                el : '#test1',
+                data : {
+                    bgcolorValue : 'red',
+                    colorValue : 'yellow',
+                    styleValue : {
+                        backgroundColor : 'red',
+                        color : 'yellow'
+                    }
+                },
+                methods : {
+                    setInlineStyle : function(){
+                        this.bgcolorValue = 'yellow',
+                        this.colorValue = 'red'
+                    },
+                    setStyleValue : function(){
+                        this.styleValue = {
+                            backgroundColor: 'yellow',
+                            color : 'red'
+                        }
+                    }
+                }
+            })
+        }
+    </script>
+</head>
+<body>
+    <div id='test1'>
+        <h3 style = 'background-color:red; color:yellow'>문자열</h3>
+        <h3 v-bind:style='{backgroundColor:bgcolorValue, color:colorValue}'>문자열</h3>
+        <button type='button' v-on:click='setInlineStyle'>inline css 변경</button>
+
+        <h3 v-bind:style='styleValue'>문자열</h3> <!--여러개 동시에 셋팅할때는 data에서 묶어다 객체로 불러와도 됨-->
+        <button type='button' v-on:click='setStyleValue'>객체 변경</button>
+    </div>
+</body>
+</html>
