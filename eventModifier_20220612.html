@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .box{
+            width : 200px;
+            height : 200px;
+            border : 1px solid black;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+    <script>
+        window.onload = function(){
+            var vm1 = new Vue({
+                el : '#test1',
+                methods : {
+                    method1 : function(){
+                        alert('method1')
+                    },
+                    method2 : function(){
+                        alert('method2')
+                    }
+                }
+            })
+        }
+    </script>
+</head>
+<body>
+    <div id="test1">
+        <div @click='method1' class="box">
+            <button type="button" @click="method2">버튼</button>
+            <button type="button" @click.stop="method2">버튼</button> <!--부모태그 이벤트로 전달x ->실행하지 않음-->
+        </div>
+        <a @click.prevent="method1" href="https://career-gogimandu.tistory.com/">ggmd</a> <!--@click.prevent = 코드링크 클릭해도 작동x 이벤트만 작동-->
+        <div @click.capture="method1" class="box"><!--캡쳐가 있으면 부모태그 이벤트 먼저->자식태그 나중-->
+            <button type="button" @click="method2">버튼</button><!--부모태그 이벤트 전달x ->alert2번-->
+        </div>
+        <div @click.self="method1" class="box">
+            <button type="button" @click="method2">버튼</button> <!--전달을 해도 self가 알아서 무시해버림-->
+            <button type="button" @click="method2">버튼</button>
+        </div>
+        <div @click.once="method1" class="box"> <!--한번 실행하고 재실행 안됨-->
+
+        </div>
+    </div>
+</body>
+</html>
