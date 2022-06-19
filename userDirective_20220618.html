@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+    <script>
+        Vue.directive('focus', {
+            inserted : function(el){
+                el.focus()
+            }
+        })
+        window.onload = function(){
+            var vm1 = new Vue({
+                el : '#test1',
+                data : {
+                    str : '',
+                    data1 : 'data1.value'
+                },
+                methods : {
+                    setStr : function(){
+                        this.str = '변경된 문자열'
+                    }
+                },
+                directives : {
+                    focus2 : {
+                        inserted : function(el){
+                            el.focus();
+                        }
+                    },
+                    test : {
+                        //지시자가 태그에 셋팅되었을 때 딱 한번 호출
+                        bind : function(el){
+                            console.log('bind')
+                        },
+                        //지시자가 셋팅되어있는 html태그가 객체로 만들어지고->사용가능한 형태가 되었을때
+                        inserted : function(el){ //딱 한번 실행될 때 - inserted
+                            console.log('inserted')
+                        },
+                        //지시자가 셋팅되어 있는 html태그 내부가 변경되기 전
+                        update : function(el){
+                            console.log('updated')
+                        },
+                        //지시자가 셋팅되어 있는 html태그 내부가 변경된 후
+                        componentUpdated : function(el){
+                            console.log('componentUpdated')
+                        },
+                        //지시자가 셋팅되어 있는 태그에서 지시자가 제거될때
+                        unbind : function(el){
+                            console.log('unbind')
+                        }
+                    },
+                    test2 : {
+                        bind : function(el, binding, vnode){
+                            console.log('el: ' + el)
+                            console.log('binding.name: ' + binding.name)
+                            console.log('binding.value: ' + binding.value)
+                            console.log('binding.arg: ' + binding.arg)
+                            console.log('bincing.modifiers.a1: ' + binding.modifiers.a1)
+                            console.log('bincing.modifiers.a2: ' + binding.modifiers.a2)
+                            console.log('bincing.modifiers.a3: ' + binding.modifiers.a3)
+                            console.log('vnode.tag: ' + vnode.tag) //해당 vnode를 사용하는 태그 명 - vnode test2를 불러오는 태그가 h3이므로 h3을 찍음
+                        }
+                    }
+                }
+            })
+        }
+    </script>
+</head>
+<body>
+    <div id="test1">
+        <input type="text" v-focus/><br/> <!--focus라는 이름의 지시자를 찾아 vue.directive안으로 들어감. 밖으로 만들면 모든 곳에서 갖다 쓸 수 있음-->
+        <input type="text" v-focus2/><br/><!--#test1 안에서 focus2를 갖다쓸 수 있음-->
+        <h3 v-test>{{str}}</h3>
+        <button type="button" @click="setStr">str 변경</button>
+        <h3 v-test2:arg1.a1.a2="data1">{{str}}</h3> <!--수식을 넣으면 계산되고, 문자열은 바인드 값을 찾아 들어감-->
+    </div>
+</body>
+</html>
